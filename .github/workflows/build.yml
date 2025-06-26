@@ -20,3 +20,12 @@ jobs:
 
     - name: Build with Maven
       run: mvn clean package
+
+    - name: Deploy to Tomcat via SCP
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.TOMCAT_HOST }}
+        username: ${{ secrets.TOMCAT_USER }}
+        password: ${{ secrets.TOMCAT_PASS }}
+        source: "target/*.war"
+        target: "D:\Tom10\apache-tomcat-10.1.41\webapps"
